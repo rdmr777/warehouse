@@ -1,7 +1,7 @@
 "use strict";
 
 // Increase this number for every deployment.
-const VERSION = 1;
+const VERSION = 2;
 const scope = self.registration.scope;
 const cachePrefix = "warehouse-shell:" + scope + ":";
 const cacheName = cachePrefix + VERSION;
@@ -34,8 +34,7 @@ self.addEventListener("activate", (event) => {
 });
 
 async function cachedOrFetch(cacheKey, request) {
-  const cache = await caches.open(cacheName);
-  return (await cache.match(cacheKey)) || fetch(request);
+  return (await caches.match(cacheKey, { cacheName })) || fetch(request);
 }
 
 self.addEventListener("fetch", (event) => {
