@@ -12,6 +12,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="stylesheet" href="style.css">
   <script defer src="app.js"></script>
+  <script defer src="rates.js"></script>
 </head>
 <body>
   <header class="masthead">
@@ -53,6 +54,18 @@
         <p>Открой файл Эксель от ответственного за склад или подтверди данные в разделе «Сверка».</p>
         <button type="button" id="start-review">Перейти к сверке</button>
       </div>
+      <section class="rates" aria-labelledby="rates-title">
+        <div class="rates-head">
+          <h2 id="rates-title">Курсы валют</h2>
+          <a href="https://www.cbr.ru/currency_base/daily/">Банк России</a>
+        </div>
+        <div id="rates-values" class="rates-values" hidden>
+          <div><span>1 юань</span><strong id="rate-cny"></strong><small id="rate-cny-official"></small></div>
+          <div><span>1 доллар США</span><strong id="rate-usd"></strong><small id="rate-usd-official"></small></div>
+        </div>
+        <p id="rates-dates" hidden></p>
+        <p id="rates-status" role="status">Загружаем курсы…</p>
+      </section>
     </section>
 
     <section id="review" aria-labelledby="review-title" hidden>

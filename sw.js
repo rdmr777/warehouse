@@ -1,7 +1,7 @@
 "use strict";
 
 // Increase this number for every deployment.
-const VERSION = 2;
+const VERSION = 3;
 const scope = self.registration.scope;
 const cachePrefix = "warehouse-shell:" + scope + ":";
 const cacheName = cachePrefix + VERSION;
@@ -10,6 +10,8 @@ const index = new URL("./index.html", scope).href;
 const staticFiles = new Set([
   "style.css",
   "app.js",
+  "rates.js",
+  "data.json",
   "manifest.webmanifest",
   "icon-192.png",
   "icon-512.png",
