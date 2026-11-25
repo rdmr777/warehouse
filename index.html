@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#182942">
+  <title>Остатки склада</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%23182942'/%3E%3Cpath d='m9 14 11-6 11 6v12l-11 6-11-6zm0 0 11 6 11-6m-11 6v12m-5-21 11 6' fill='none' stroke='%23f9d397' stroke-width='1.7' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="shell identity">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="m5 10 11-6 11 6v12l-11 6-11-6zm0 0 11 6 11-6m-11 6v12M10.5 7l11 6v5" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+      <span>Остатки склада</span>
+    </div>
+    <nav class="shell menu" aria-label="Разделы">
+      <button id="stock-tab" type="button" aria-current="page" aria-controls="stock">Остатки</button>
+      <button id="review-tab" type="button" aria-controls="review">Сверка <span id="review-badge" class="badge" hidden></span></button>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <p id="notice" class="notice" role="status" hidden></p>
+    <section id="stock" aria-labelledby="stock-title">
+      <div class="section-head">
+        <div><h1 id="stock-title">Остатки</h1><p>Подтверждённое количество на складе.</p></div>
+        <div class="actions stock-actions">
+          <button type="button" id="open-stock">Открыть файл остатков</button>
+          <button type="button" id="export-stock" class="primary">Скачать в Эксель</button>
+        </div>
+      </div>
+      <div id="stock-content" hidden>
+        <div class="stock-meta"><span id="stock-count"></span><span id="stock-date"></span></div>
+        <form id="search-form" role="search" class="search">
+          <label class="sr-only" for="search">Артикул, цвет или размер</label>
+          <input id="search" type="search" placeholder="Артикул, цвет или размер">
+          <button type="submit">Найти</button>
+        </form>
+        <div class="ledger" id="stock-ledger">
+          <div class="ledger-head stock-grid" aria-hidden="true"><span>Артикул и вариант</span><span>Остаток</span><span>Дата сверки</span></div>
+          <ul id="stock-list" class="rows"></ul>
+        </div>
+        <p id="no-results" class="empty compact" hidden>Ничего не найдено. Попробуй другой артикул, цвет или размер.</p>
+      </div>
+      <div id="stock-empty" class="empty stock-empty">
+        <h2>Здесь появятся остатки</h2>
+        <p>Открой файл Эксель от ответственного за склад или подтверди данные в разделе «Сверка».</p>
+        <button type="button" id="start-review">Перейти к сверке</button>
+      </div>
+    </section>
+
+    <section id="review" aria-labelledby="review-title" hidden>
+      <div class="section-head">
+        <div><h1 id="review-title">Сверка</h1><p>Проверь данные по коробкам перед обновлением остатков.</p></div>
+        <div class="actions review-actions">
+          <button type="button" id="open-review">Загрузить данные сверки</button>
+          <button type="button" id="add-box" class="primary">Добавить коробку</button>
+        </div>
+      </div>
+      <div id="review-empty" class="empty">
+        <h2>Начни сверку коробок</h2>
+        <p>Загрузи файл сверки, который помощник подготовил по фото, или добавь коробку вручную.</p>
+        <button type="button" id="demo">Открыть пробные данные</button>
+      </div>
+      <div id="review-content" hidden>
+        <div class="review-summary">
+          <div><strong id="box-count"></strong><span id="pending-count"></span></div>
+          <p id="pending-message" hidden>Остатки спорных товаров сохранятся. Если товар в спорной строке неизвестен, сначала уточни его.</p>
+        </div>
+        <ul id="box-list" class="rows boxes" aria-label="Коробки для сверки"></ul>
+        <div class="confirmation">
+          <div>
+            <h2>Предварительный итог</h2>
+            <p id="preview-empty" hidden>Пока нет товаров, остаток которых можно подтвердить.</p>
+            <ul id="preview-list" class="preview"></ul>
+          </div>
+          <button type="button" id="confirm-review" class="primary">Подтвердить сверку</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div><strong>Резервная копия</strong><p>Остатки и черновик сохраняются в этом браузере.</p></div>
+      <div class="actions backup-actions">
+        <button type="button" id="backup">Скачать копию данных</button>
+        <button type="button" id="restore">Загрузить копию</button>
+      </div>
+    </footer>
+  </main>
+
+  <input type="file" id="review-file" accept=".json,application/json" hidden>
+  <input type="file" id="stock-file" accept=".xlsx" hidden>
+  <input type="file" id="backup-file" accept=".json,application/json" hidden>
+
+  <dialog id="box-dialog" aria-labelledby="box-title">
+    <form id="box-form">
+      <h2 id="box-title">Коробка</h2>
+      <div class="fields">
+        <label>Отметка коробки<input name="box" required maxlength="100" placeholder="Например, К-001"></label>
+        <label>Артикул<input name="sku" maxlength="100"></label>
+        <label>Цвет<input name="color" maxlength="100"></label>
+        <label>Размер<input name="size" maxlength="100"></label>
+        <label>Количество, шт.<input name="qty" type="number" inputmode="numeric" min="0" max="999999999" step="1"></label>
+        <label class="check"><input name="uncertain" type="checkbox"> Требуется уточнение</label>
+      </div>
+      <p id="box-error" class="form-error" role="alert" hidden></p>
+      <div class="actions dialog-actions">
+        <button type="button" id="cancel-box">Отмена</button>
+        <button type="submit" class="primary">Сохранить коробку</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title">
+    <form method="dialog">
+      <h2 id="confirm-title"></h2>
+      <p id="confirm-message"></p>
+      <div class="actions dialog-actions">
+        <button value="cancel" autofocus>Отмена</button>
+        <button value="confirm" class="primary" id="confirm-action">Подтвердить</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>
