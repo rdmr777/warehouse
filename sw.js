@@ -1,7 +1,7 @@
 "use strict";
 
 // Increase this number for every deployment.
-const VERSION = 3;
+const VERSION = 4;
 const scope = self.registration.scope;
 const cachePrefix = "warehouse-shell:" + scope + ":";
 const cacheName = cachePrefix + VERSION;
