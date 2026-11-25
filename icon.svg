@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Остатки склада</title>
+  <rect width="512" height="512" fill="#182942"/>
+  <path d="M128 182 256 116 384 182 256 248Z" fill="#f9d397"/>
+  <path d="M128 182 256 248V396L128 330Z" fill="#f5bc68"/>
+  <path d="M256 248 384 182V330L256 396Z" fill="#db9848"/>
+  <path d="M202 144 330 210V269L308 280V222L180 156Z" fill="#182942"/>
+  <path d="m154 295 55 28m-55-10 34 17" fill="none" stroke="#182942" stroke-linecap="round" stroke-width="9"/>
+  <path d="M128 182 256 116 384 182V330L256 396 128 330Zm0 0 128 66 128-66M256 248V396" fill="none" stroke="#182942" stroke-linejoin="round" stroke-width="10"/>
+</svg>

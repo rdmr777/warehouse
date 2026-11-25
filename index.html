@@ -6,6 +6,10 @@
   <meta name="theme-color" content="#182942">
   <title>Остатки склада</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%23182942'/%3E%3Cpath d='m9 14 11-6 11 6v12l-11 6-11-6zm0 0 11 6 11-6m-11 6v12m-5-21 11 6' fill='none' stroke='%23f9d397' stroke-width='1.7' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="stylesheet" href="style.css">
   <script defer src="app.js"></script>
 </head>
@@ -123,5 +127,14 @@
       </div>
     </form>
   </dialog>
+  <script>
+    if (window.isSecureContext && location.protocol !== "file:" && "serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js", { updateViaCache: "none" }).catch((error) => {
+          console.warn("Не удалось подготовить приложение к работе без интернета.", error);
+        });
+      });
+    }
+  </script>
 </body>
 </html>
