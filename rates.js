@@ -33,6 +33,9 @@
       document.getElementById("rate-" + id + "-official").textContent =
         "ЦБ: " + rubles.format(Number(rate.official_rub));
     }
+    document.getElementById("rates-brief").textContent =
+      "· Юань " + rubles.format(Number(data.rates.CNY.adjusted_rub)) +
+      " · Доллар " + rubles.format(Number(data.rates.USD.adjusted_rub));
     const date = data.effective_date.split("-").reverse().join(".");
     const updated = moscowTime.format(new Date(data.updated_at));
     const dates = document.getElementById("rates-dates");

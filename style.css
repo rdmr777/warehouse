@@ -59,13 +59,15 @@ input::placeholder { color: var(--muted); }
 .empty p { max-width: 54ch; margin-top: 7px; }
 .empty button { margin-top: 17px; }
 .empty.compact { padding: 18px; }
-.rates { margin-top: 22px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 9px; background: var(--paper); }
-.rates-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 10px; }
-.rates-head a { color: var(--muted); font-size: 14px; }
+.rates { margin-top: 10px; color: var(--muted); font-size: 12px; }
+.rates summary { width: fit-content; min-height: 44px; padding-block: 13px; cursor: pointer; overflow-wrap: anywhere; }
+#rates-brief { margin-inline-start: 4px; font-variant-numeric: tabular-nums; }
+.rates-head { margin-bottom: 6px; }
+.rates-head a { color: inherit; }
 .rates-values { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 10px; }
 .rates-values span, .rates-values strong, .rates-values small { display: block; }
-.rates-values strong { margin-block: 3px; font-size: clamp(20px, 4vw, 27px); font-variant-numeric: tabular-nums; }
-.rates-values small, .rates p { color: var(--muted); font-size: 13px; }
+.rates-values strong { margin-block: 2px; font-size: 14px; font-variant-numeric: tabular-nums; }
+.rates-values small, .rates p { color: inherit; font-size: 12px; }
 .rates p + p { margin-top: 4px; }
 .notice { margin-bottom: 18px; background: #dceee5; border: 1px solid #9db9a8; color: #204c37; border-radius: 7px; padding: 11px 14px; }
 .notice.error { background: #f9e8e8; color: #7d252a; border-color: #d5b0b0; }

@@ -39,24 +39,24 @@
       <div id="stock-content" hidden>
         <div class="stock-meta"><span id="stock-count"></span><span id="stock-date"></span></div>
         <form id="search-form" role="search" class="search">
-          <label class="sr-only" for="search">Артикул, цвет или размер</label>
-          <input id="search" type="search" placeholder="Артикул, цвет или размер">
+          <label class="sr-only" for="search">Номер короба, материал, размер, артикул или цвет</label>
+          <input id="search" type="search" placeholder="Короб, материал, размер или артикул">
           <button type="submit">Найти</button>
         </form>
         <div class="ledger" id="stock-ledger">
-          <div class="ledger-head stock-grid" aria-hidden="true"><span>Артикул и вариант</span><span>Остаток</span><span>Дата сверки</span></div>
+          <div class="ledger-head stock-grid" aria-hidden="true"><span>Короб или артикул</span><span>Остаток</span><span>Дата сверки</span></div>
           <ul id="stock-list" class="rows"></ul>
         </div>
-        <p id="no-results" class="empty compact" hidden>Ничего не найдено. Попробуй другой артикул, цвет или размер.</p>
+        <p id="no-results" class="empty compact" hidden>Ничего не найдено. Попробуй другой номер короба, материал, размер или артикул.</p>
       </div>
       <div id="stock-empty" class="empty stock-empty">
         <h2>Здесь появятся остатки</h2>
-        <p>Открой файл Эксель от ответственного за склад или подтверди данные в разделе «Сверка».</p>
+        <p>Открой файл остатков по коробам, исходную выгрузку Эксель из приложения или подтверди данные в разделе «Сверка».</p>
         <button type="button" id="start-review">Перейти к сверке</button>
       </div>
-      <section class="rates" aria-labelledby="rates-title">
+      <details class="rates">
+        <summary>Курсы валют <span id="rates-brief"></span></summary>
         <div class="rates-head">
-          <h2 id="rates-title">Курсы валют</h2>
           <a href="https://www.cbr.ru/currency_base/daily/">Банк России</a>
         </div>
         <div id="rates-values" class="rates-values" hidden>
@@ -65,7 +65,7 @@
         </div>
         <p id="rates-dates" hidden></p>
         <p id="rates-status" role="status">Загружаем курсы…</p>
-      </section>
+      </details>
     </section>
 
     <section id="review" aria-labelledby="review-title" hidden>
@@ -108,7 +108,7 @@
   </main>
 
   <input type="file" id="review-file" accept=".json,application/json" hidden>
-  <input type="file" id="stock-file" accept=".xlsx" hidden>
+  <input type="file" id="stock-file" accept=".xlsx,.json" hidden>
   <input type="file" id="backup-file" accept=".json,application/json" hidden>
 
   <dialog id="box-dialog" aria-labelledby="box-title">
