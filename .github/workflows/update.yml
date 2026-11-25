@@ -1,0 +1,36 @@
+name: Обновить курсы Банка России
+
+on:
+  schedule:
+    # 08:17 по Москве = 05:17 UTC.
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: warehouse-exchange-rates
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Получить файлы приложения
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          ref: main
+      - name: Получить курсы Банка России
+        run: python3 fetch.py
+      - name: Сохранить файл курсов
+        run: |
+          git add -- data.json
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Обновить курсы Банка России'
+          git pull --rebase origin main
+          git push origin HEAD:main
