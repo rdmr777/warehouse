@@ -1,16 +1,16 @@
 {
   "source": "Банк России",
-  "effective_date": "2026-11-27",
-  "updated_at": "2026-11-26T15:10:13+00:00",
+  "effective_date": "2026-11-28",
+  "updated_at": "2026-11-27T15:02:10+00:00",
   "markup_percent": 2,
   "rates": {
     "CNY": {
-      "official_rub": "12.3184",
-      "adjusted_rub": "12.564768"
+      "official_rub": "12.327",
+      "adjusted_rub": "12.57354"
     },
     "USD": {
-      "official_rub": "82.1265",
-      "adjusted_rub": "83.769030"
+      "official_rub": "82.2732",
+      "adjusted_rub": "83.918664"
     }
   }
 }
